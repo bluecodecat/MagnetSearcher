@@ -1,14 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MagnetSearcher
 {
     class MagnetUtility
     {
+        public static async Task<string> GetUrltoHtml(string url)
+        {
+            string result = "";
+            try
+            {
+                HttpClient webclient = new HttpClient();
+                result = await webclient.GetStringAsync(url);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            return result;
+
+        }
 
         public static long StringSize2ByteSize(string str)
         {
